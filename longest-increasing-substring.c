@@ -23,6 +23,7 @@ int binsearch(int n,int a[],int m){
 int main(){
     int n,i,j,k,ans=0,len=0;
     /*
+    POJ 3903
     O(nlogn)
     http://chhaj5236.blog.163.com/blog/static/1128810812013332417789/
     */
@@ -35,11 +36,14 @@ int main(){
     for(i=1;i<=n;i++){
         set[i]=INT_MAX;
         j=binsearch(len,set,a[i]);
-        if(set[j]<a[i]){
-            set[++len]=a[i];
+        if(j==len){
+            if(set[j]<=a[i])
+                set[++len]=a[i];
+            else
+                set[j]=a[i];
             f[i]=len;
         }else{
-            f[i]=set[j]+1;
+            f[i]= a[i]==set[j] ? j+1 : j;
         }
         ans=max(ans,f[i]);
     }
